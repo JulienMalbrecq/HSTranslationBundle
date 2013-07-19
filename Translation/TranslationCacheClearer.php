@@ -2,13 +2,12 @@
 
 namespace HS\TranslationBundle\Translation;
 
-/**
- * Clear the translation cache
- */
-
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Filesystem\Filesystem;
 
+/**
+ * Clear the translation cache
+ */
 class TranslationCacheClearer
 {
     private $cacheDir;
@@ -21,13 +20,13 @@ class TranslationCacheClearer
     }
     
     /**
-     * Clear the translation cache
+     * Clear the translation cache directory
      * 
-     * @return mixed Return true on success, null if no cache found
+     * @throws Symfony\Component\Filesystem\Exception\IOException When removal fails
+     * @return mixed Return null if no cache directory is found, true on success 
      */
     public function execute()
     {
-        //- check that the translation cache exists
         if (!$this->filesystem->exists($this->cacheDir)) {
             return null;
         }
