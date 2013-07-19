@@ -8,13 +8,22 @@ use HS\TranslationBundle\Entity\TranslationDomain;
 use HS\TranslationBundle\Entity\TranslationTerm;
 use HS\TranslationBundle\Entity\TranslationData;
 
+/**
+ * Manage the creation 
+ */
 class TranslationTermManager extends TranslationManager
 {
     public function getEmptyTerm()
     {
         $term = new TranslationTerm();
-        
-        $languages = $this->em->getRepository('HSTranslationBundle:Language')
+        $this->attachTranslationData($term);
+        return $term;
+    }
+    
+    public function attachTranslationData(TranslationTerm &$term)
+    {
+        $languages = $this->em
+            ->getRepository('HSTranslationBundle:Language')
             ->findBy(array('enabled' => true));
         
         foreach ($languages as $language) {
@@ -23,8 +32,6 @@ class TranslationTermManager extends TranslationManager
             $localizedTerm->setLanguage($language);
             $term->addTranslationData($localizedTerm);
         }
-        
-        return $term;
     }
     
     public function termExists($name, TranslationDomain $domain)
