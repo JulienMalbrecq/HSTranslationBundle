@@ -20,9 +20,13 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('hs_translation');
 
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        // missing translation
+        $rootNode
+            ->children()
+                ->arrayNode('missing_translation')
+                    ->children()
+                        ->booleanNode('enabled')->defaultFalse();
+            
 
         return $treeBuilder;
     }

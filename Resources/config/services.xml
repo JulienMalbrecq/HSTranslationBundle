@@ -6,7 +6,7 @@
 
     <parameters>
         <parameter key="hs_translation.translation.db_loader.class">HS\TranslationBundle\Translation\Loader\DBLoader</parameter>
-        <parameter key="hs_translation.translation.missing_translation.class">HS\TranslationBundle\Translation\MissingTranslationUpdater</parameter>
+        <parameter key="hs_translation.missing_translation.listener.class">HS\TranslationBundle\Event\MissingTranslationListener</parameter>
         <parameter key="hs_translation.cache.clearer.class">HS\TranslationBundle\Translation\TranslationCacheClearer</parameter>
         
         <parameter key="hs_translation.manager.translation_domain.class">HS\TranslationBundle\Manager\TranslationDomainManager</parameter>
@@ -19,10 +19,12 @@
             <tag name="translation.loader" alias="db" />
         </service>
         
-        <service id="hs_translation.translation.missing_translation_updater" class="%hs_translation.translation.missing_translation.class%">
+        <service id="hs_translation.missing_translation.listener" class="%hs_translation.missing_translation.listener.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="hs_translation.manager.translation_domain" />
             <argument type="service" id="hs_translation.manager.translation_term" />
+            <argument>%hs_translation.missing_translation.insert.enabled%</argument>
+            <tag name="kernel.event_listener" event="translation.missing_translation.request" method="onEvent" />
         </service>
         
         <service id="hs_translation.cache.clearer" class="%hs_translation.cache.clearer.class%">

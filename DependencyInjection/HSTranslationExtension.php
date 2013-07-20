@@ -24,5 +24,10 @@ class HSTranslationExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+        
+        $container->setParameter(
+            'hs_translation.missing_translation.insert.enabled',
+            $config['missing_translation']['enabled']
+        );
     }
 }
