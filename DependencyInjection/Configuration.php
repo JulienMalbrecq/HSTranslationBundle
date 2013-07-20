@@ -23,7 +23,7 @@ class Configuration implements ConfigurationInterface
         // missing translation
         $rootNode
             ->children()
-                ->arrayNode('missing_translation')
+                ->arrayNode('gather_missing_translation')
                     ->children()
                         ->booleanNode('enabled')->defaultFalse();
             

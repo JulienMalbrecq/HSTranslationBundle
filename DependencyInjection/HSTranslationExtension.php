@@ -26,7 +26,7 @@ class HSTranslationExtension extends Extension
         $loader->load('services.xml');
         
         $container->setParameter(
-            'hs_translation.missing_translation.insert.enabled',
+            'hs_translation.gather_missing_translation.enabled',
             $config['missing_translation']['enabled']
         );
     }
