@@ -23,7 +23,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="hs_translation.manager.translation_domain" />
             <argument type="service" id="hs_translation.manager.translation_term" />
-            <argument>%hs_translation.missing_translation.insert.enabled%</argument>
+            <argument>%hs_translation.gather_missing_translation.enabled%</argument>
             <tag name="kernel.event_listener" event="translation.missing_translation.request" method="onEvent" />
         </service>
         

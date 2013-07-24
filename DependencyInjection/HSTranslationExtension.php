@@ -27,7 +27,7 @@ class HSTranslationExtension extends Extension
         
         $container->setParameter(
             'hs_translation.gather_missing_translation.enabled',
-            $config['missing_translation']['enabled']
+            $config['gather_missing_translation']['enabled']
         );
     }
 }
