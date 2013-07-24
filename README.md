@@ -17,3 +17,13 @@ hs_translation:
     gather_missing_translation:
         enabled: true
 ```
+
+You can bypass the gathering of terms by defining the domain they belong to:
+```
+hs_translation:
+    gather_missing_translation:
+        ...
+        bypassed_domains:
+            - admin
+            - ...
+```

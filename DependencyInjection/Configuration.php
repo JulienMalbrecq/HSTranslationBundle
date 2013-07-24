@@ -25,9 +25,12 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('gather_missing_translation')
                     ->children()
-                        ->booleanNode('enabled')->defaultFalse();
-            
-
+                        ->booleanNode('enabled')->defaultFalse()->end()
+                        ->arrayNode('bypassed_domains')
+                            ->addDefaultChildrenIfNoneSet(0)
+                            ->prototype('scalar')
+        ;
+        
         return $treeBuilder;
     }
 }

@@ -14,17 +14,20 @@ class MissingTranslationListener
     private $em;
     private $domainManager;
     private $termManager;
+    private $bypassedDomains;
     private $enabled;
     
     function __construct(
         EntityManager $em,
         TranslationDomainManager $domainManager,
         TranslationTermManager $termManager,
+        $bypassedDomains = array(),
         $enabled = false)
     {
         $this->em = $em;
         $this->domainManager = $domainManager;
         $this->termManager = $termManager;
+        $this->bypassedDomains = $bypassedDomains;
         $this->enabled = $enabled;
     }
     
@@ -35,7 +38,8 @@ class MissingTranslationListener
      */
     public function onEvent(MissingTranslationEvent $event)
     {
-        if ($this->enabled) {
+        if (!in_array($event->getDomain(), $this->bypassedDomains)
+            && $this->enabled) {
             $this->insertTranslation($event->getId(), $event->getDomain());
         }
     }

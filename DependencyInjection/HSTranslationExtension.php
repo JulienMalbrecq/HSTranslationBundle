@@ -29,5 +29,10 @@ class HSTranslationExtension extends Extension
             'hs_translation.gather_missing_translation.enabled',
             $config['gather_missing_translation']['enabled']
         );
+        
+        $container->setParameter(
+            'hs_translation.gather_missing_translation.bypassed_domains',
+            $config['gather_missing_translation']['bypassed_domains']
+        );
     }
 }
