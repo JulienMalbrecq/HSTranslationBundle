@@ -24,6 +24,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->arrayNode('gather_missing_translation')
+                    ->canBeEnabled()
                     ->children()
                         ->booleanNode('enabled')->defaultFalse()->end()
                         ->arrayNode('bypassed_domains')
