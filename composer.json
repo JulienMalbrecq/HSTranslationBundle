@@ -6,7 +6,7 @@
         {
             "name": "Julien Malbrecq",
             "email": "bjuice@gmail.com"
-        },
+        }
     ],
     "require": {
         "symfony/console": "~2.2",
