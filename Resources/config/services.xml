@@ -11,6 +11,8 @@
         
         <parameter key="hs_translation.manager.translation_domain.class">HS\TranslationBundle\Manager\TranslationDomainManager</parameter>
         <parameter key="hs_translation.manager.translation_term.class">HS\TranslationBundle\Manager\TranslationTermManager</parameter>
+        
+        <parameter key="hs_translation.manager.translation_language.class">HS\TranslationBundle\Manager\TranslationLanguageManager</parameter>
     </parameters>
 
     <services>
@@ -38,6 +40,10 @@
         </service>
         
         <service id="hs_translation.manager.translation_term" class="%hs_translation.manager.translation_term.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+        </service>
+        
+        <service id="hs_translation.manager.translation_language" class="%hs_translation.manager.translation_language.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
     </services>

@@ -26,6 +26,16 @@ class HSTranslationExtension extends Extension
         $loader->load('services.xml');
         
         $container->setParameter(
+            'hs_translation.languages',
+            $config['languages']
+        );
+        
+        $container->setParameter(
+            'hs_translation.domains',
+            $config['domains']
+        );
+        
+        $container->setParameter(
             'hs_translation.gather_missing_translation.enabled',
             $config['gather_missing_translation']['enabled']
         );

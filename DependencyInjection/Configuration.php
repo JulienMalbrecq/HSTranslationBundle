@@ -23,6 +23,16 @@ class Configuration implements ConfigurationInterface
         // missing translation
         $rootNode
             ->children()
+                ->arrayNode('languages')
+                    ->defaultValue(array('en' => 'English'))
+                    ->prototype('scalar')->end()
+                ->end()
+            
+                ->arrayNode('domains')
+                    ->defaultValue(array('messages' => 'Messages', 'validators' => 'Form validators'))
+                    ->prototype('scalar')->end()
+                ->end()
+            
                 ->arrayNode('gather_missing_translation')
                     ->canBeEnabled()
                     ->children()
