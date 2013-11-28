@@ -1,12 +1,34 @@
 # HS translation Bundle
 
-## Warning
-
-This is a work in progress. Do not use this in production.
-
 ## Introduction
 
 Manage i18n strings in the database.
+
+## Installation
+
+### Via composer
+
+Add the repository to your composer.json:
+```
+    ...
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/JulienMalbrecq/HSTranslationBundle.git"
+        }
+    ],
+    ...
+```
+
+Add then the bundle to the list of requirements:
+```
+    ...
+    "require": {
+        "hs/translation-bundle": "dev-master",
+        ...
+    },
+    ...
+```
 
 ## Configuration
 
@@ -26,6 +48,11 @@ hs_translation:
 Then, you can insert the configured languages and domains by using the provided installation command:
 ```
 php app/console hs:translation:install
+```
+
+You can gather the translation via the `translation:update` command using the `db` format too:
+```
+app\console translation:update --output-format=db --force fr AcmeDemoBundle
 ```
 
 ## Missing translations
