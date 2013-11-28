@@ -25,7 +25,9 @@ class TranslationDomainManager extends TranslationManager
     
     public function addDomain($domain, $name, $enabled = true)
     {
-        $repository = $this->em->getRepository('HSTranslationBundle:TranslationDomain');
+        $repository = $this->em->getRepository(
+            'HSTranslationBundle:TranslationDomain'
+        );
         
         //- check that the domain is not yet in the database
         $entity = $repository->findOneBy(array('domain' => $domain));
@@ -43,7 +45,7 @@ class TranslationDomainManager extends TranslationManager
 
         //- persist it
         $this->em->persist($newDomain);
-        $this->em->flush();
+        $this->em->flush($newDomain);
         
         return true;
     }

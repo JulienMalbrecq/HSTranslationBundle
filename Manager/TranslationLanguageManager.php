@@ -30,7 +30,7 @@ class TranslationLanguageManager extends TranslationManager
 
         //- persist it
         $this->em->persist($newLanguage);
-        $this->em->flush();
+        $this->em->flush($newLanguage);
         
         return true;
     }
