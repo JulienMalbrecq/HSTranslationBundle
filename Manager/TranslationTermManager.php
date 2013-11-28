@@ -34,6 +34,25 @@ class TranslationTermManager extends TranslationManager
         }
     }
     
+    public function addBlankTerm(TranslationDomain $domain, $name, $translation)
+    {
+        if ($this->termExists($name, $domain)) {
+            return;
+        }
+        
+        $term = $this->getEmptyTerm();
+        $term->setDomain($domain)
+            ->setMachineName($name)
+            ->setEnabled();
+        
+        foreach ($term->getTranslationData() as $data) {
+            $data->setTranslation($translation);
+        }
+        
+        $this->em->persist($term);
+        $this->em->flush($term);
+    }
+    
     public function termExists($name, TranslationDomain $domain)
     {
         return !!$this->em->getRepository('HSTranslationBundle:TranslationTerm')
