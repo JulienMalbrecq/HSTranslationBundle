@@ -12,47 +12,61 @@ class HSInstallationCommand extends ContainerAwareCommand
     {
         $this
             ->setName('hs:translation:install')
-            ->setDescription('Insert the language and domain entities defined in the configuration in the database');
+            ->setDescription('Insert in the database the languages and domains defined in the configuration');
     }
     
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->installLanguages($input, $output);
-        $this->installDomains($input, $output);
+        $this->insertLanguages($input, $output);
+        $this->insertDomains($input, $output);
     }
     
-    protected function installLanguages(InputInterface $input, OutputInterface $output)
+    /**
+     * Insert in the database the translation languages
+     * defined in the configuration
+     * 
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function insertLanguages(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Installing languages:');
+        $output->writeln('Inserting languages:');
         $languageManager = $this->getContainer()->get('hs_translation.manager.translation_language');
         $languages = $this->getContainer()->getParameter('hs_translation.languages');
         
         $count = 1;
         foreach ($languages as $code => $name) {
             if ($languageManager->addLanguage($code, $name, $count++)) {
-                $output->writeln($name . ' installed.');
+                $output->writeln($name . ' inserted');
             } else {
-                $output->writeln($name . ' already installed.');
+                $output->writeln($name . ' already inserted');
             }
         }
         
-        $output->writeln('The languages are now installed.');
+        $output->writeln('The languages are now inserted');
     }
     
-    protected function installDomains(InputInterface $input, OutputInterface $output)
+    /**
+     * Insert in the database the translation domains
+     * defined in the configuration
+     * 
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function insertDomains(InputInterface $input, OutputInterface $output)
     {
-        $output->writeln('Installing domains:');
+        $output->writeln('Inserting domains:');
         $domainManager = $this->getContainer()->get('hs_translation.manager.translation_domain');
         $domains = $this->getContainer()->getParameter('hs_translation.domains');
         
         foreach ($domains as $domain => $name) {
             if ($domainManager->addDomain($domain, $name)) {
-                $output->writeln($name . ' installed.');
+                $output->writeln($name . ' inserted');
             } else {
-                $output->writeln($name . ' already installed.');
+                $output->writeln($name . ' already inserted');
             }
         }
         
-        $output->writeln('The domains are now installed.');
+        $output->writeln('The domains are now inserted');
     }
 }
