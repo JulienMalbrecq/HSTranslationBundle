@@ -51,6 +51,8 @@ class TranslationTermManager extends TranslationManager
         
         $this->em->persist($term);
         $this->em->flush($term);
+        
+        return $term;
     }
     
     public function termExists($name, TranslationDomain $domain)
