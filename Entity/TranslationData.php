@@ -27,7 +27,7 @@ class TranslationData
     /**
      * @var string
      *
-     * @ORM\Column(name="translation", type="string")
+     * @ORM\Column(name="translation", type="text")
      */
     private $translation;
 
