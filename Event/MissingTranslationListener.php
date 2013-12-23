@@ -3,15 +3,15 @@
 namespace HS\TranslationBundle\Event;
 
 use Doctrine\ORM\EntityManager;
-
-use HS\TranslationBundle\Manager\TranslationDomainManager;
-use HS\TranslationBundle\Manager\TranslationTermManager;
-
 use HS\TranslationBundle\Event\MissingTranslationEvent;
+use HS\TranslationBundle\Manager\TranslationDomainManager;
+use HS\TranslationBundle\Manager\TranslationFileManager;
+use HS\TranslationBundle\Manager\TranslationTermManager;
 
 class MissingTranslationListener
 {
     private $em;
+    private $fileManager;
     private $domainManager;
     private $termManager;
     private $bypassedDomains;
@@ -19,12 +19,14 @@ class MissingTranslationListener
     
     function __construct(
         EntityManager $em,
+        TranslationFileManager $fileManager,
         TranslationDomainManager $domainManager,
         TranslationTermManager $termManager,
         $bypassedDomains = array(),
         $enabled = false)
     {
         $this->em = $em;
+        $this->fileManager = $fileManager;
         $this->domainManager = $domainManager;
         $this->termManager = $termManager;
         $this->bypassedDomains = $bypassedDomains;
@@ -34,7 +36,7 @@ class MissingTranslationListener
     /**
      * Missing translation event handler.
      * 
-     * @param \HS\TranslationBundle\Event\MissingTranslationEvent $event
+     * @param MissingTranslationEvent $event
      */
     public function onEvent(MissingTranslationEvent $event)
     {
@@ -71,5 +73,7 @@ class MissingTranslationListener
             $this->em->persist($term);
             $this->em->flush();
         }
+        
+        $this->fileManager->ensureTranslationFile($domain);
     }
 }

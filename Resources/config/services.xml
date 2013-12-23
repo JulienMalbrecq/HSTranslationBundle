@@ -11,8 +11,8 @@
         
         <parameter key="hs_translation.manager.translation_domain.class">HS\TranslationBundle\Manager\TranslationDomainManager</parameter>
         <parameter key="hs_translation.manager.translation_term.class">HS\TranslationBundle\Manager\TranslationTermManager</parameter>
-        
         <parameter key="hs_translation.manager.translation_language.class">HS\TranslationBundle\Manager\TranslationLanguageManager</parameter>
+        <parameter key="hs_translation.manager.translation_file.class">HS\TranslationBundle\Manager\TranslationFileManager</parameter>
         
         <parameter key="hs_translation.dumper.db.class">HS\TranslationBundle\Dumper\DBDumper</parameter>
     </parameters>
@@ -25,6 +25,7 @@
         
         <service id="hs_translation.missing_translation.listener" class="%hs_translation.missing_translation.listener.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="hs_translation.manager.translation_file" />
             <argument type="service" id="hs_translation.manager.translation_domain" />
             <argument type="service" id="hs_translation.manager.translation_term" />
             <argument>%hs_translation.gather_missing_translation.bypassed_domains%</argument>
@@ -35,6 +36,11 @@
         <service id="hs_translation.cache.clearer" class="%hs_translation.cache.clearer.class%">
             <argument type="service" id="kernel" />
             <argument type="service" id="filesystem" />
+        </service>
+        
+        <service id="hs_translation.manager.translation_file" class="%hs_translation.manager.translation_file.class%">
+            <argument>%hs_translation.languages%</argument>
+            <argument>%hs_translation.translation_directory%</argument>
         </service>
         
         <service id="hs_translation.manager.translation_domain" class="%hs_translation.manager.translation_domain.class%">

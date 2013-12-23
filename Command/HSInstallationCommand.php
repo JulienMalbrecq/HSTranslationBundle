@@ -19,6 +19,7 @@ class HSInstallationCommand extends ContainerAwareCommand
     {
         $this->insertLanguages($input, $output);
         $this->insertDomains($input, $output);
+        $this->insertFiles($input, $output);
     }
     
     /**
@@ -68,5 +69,25 @@ class HSInstallationCommand extends ContainerAwareCommand
         }
         
         $output->writeln('The domains are now inserted');
+    }
+    
+    /**
+     * Insert in the database the translation domains
+     * defined in the configuration
+     * 
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function insertFiles(InputInterface $input, OutputInterface $output)
+    {
+        $output->writeln('Inserting translation files:');
+        $fileManager = $this->getContainer()->get('hs_translation.manager.translation_file');
+        $domains = $this->getContainer()->getParameter('hs_translation.domains');
+        
+        foreach ($domains as $domain => $name) {
+            $fileManager->ensureTranslationFile($domain);
+        }
+        
+        $output->writeln('The translation files are now created ');
     }
 }

@@ -2,11 +2,6 @@
 
 namespace HS\TranslationBundle\Event;
 
-/**
- * Description of TranslationEvents
- *
- * @author juma
- */
 final class TranslationEvents
 {
     /**

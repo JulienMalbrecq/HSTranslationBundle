@@ -2,8 +2,8 @@
 
 namespace HS\TranslationBundle\Manager;
 
-use HS\TranslationBundle\Manager\TranslationManager;
 use HS\TranslationBundle\Entity\TranslationDomain;
+use HS\TranslationBundle\Manager\TranslationManager;
 
 class TranslationDomainManager extends TranslationManager
 {
@@ -41,6 +41,8 @@ class TranslationDomainManager extends TranslationManager
         //- persist it
         $this->em->persist($newDomain);
         $this->em->flush($newDomain);
+        
+        // check that the translation trigger file exists
         
         return true;
     }

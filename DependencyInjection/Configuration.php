@@ -23,6 +23,7 @@ class Configuration implements ConfigurationInterface
         // missing translation
         $rootNode
             ->children()
+                ->scalarNode('translation_directory')->end()
                 ->arrayNode('languages')
                     ->defaultValue(array('en' => 'English'))
                     ->prototype('scalar')->end()

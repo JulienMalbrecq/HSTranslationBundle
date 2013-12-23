@@ -26,6 +26,11 @@ class HSTranslationExtension extends Extension
         $loader->load('services.xml');
         
         $container->setParameter(
+            'hs_translation.translation_directory',
+            $config['translation_directory']
+        );
+        
+        $container->setParameter(
             'hs_translation.languages',
             $config['languages']
         );
