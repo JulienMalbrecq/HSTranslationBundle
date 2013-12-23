@@ -72,7 +72,8 @@ class HSInstallationCommand extends ContainerAwareCommand
     }
     
     /**
-     * Create the files that will trigger the translation loader
+     * Insert in the database the translation domains
+     * defined in the configuration
      * 
      * @param \Symfony\Component\Console\Input\InputInterface $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
