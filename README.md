@@ -30,11 +30,13 @@ Add then the bundle to the list of requirements:
     ...
 ```
 
-## Configuration
+## Basic Configuration
 
-This is a 2 step process. First, the languages used and the translation domains have to be defined in `config.yml`:
+Configure first the directory that will be used to generate the translation 'trigger' files in `config.yml`.
+The languages and translation domains used by your application have to be defined there too:
 ```
 hs_translation:
+    translation_directory: %kernel.root_dir%/Resources/translations # this is the default translation directory
     languages:
         en: English
         fr: French
