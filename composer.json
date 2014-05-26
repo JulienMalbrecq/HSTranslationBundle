@@ -1,6 +1,7 @@
 {
     "name": "hs/translation-bundle",
     "type": "symfony-bundle",
+	"license": "GPL-3.0",
     "description": "Symfony HSTranslationBundle",
     "authors": [
         {
