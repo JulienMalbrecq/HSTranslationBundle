@@ -55,7 +55,7 @@ class TranslationTerm
     private $enabled;
 
     /**
-     * @var type
+     * @var TranslationData
      * 
      * @ORM\OneToMany(targetEntity="TranslationData", mappedBy="term", cascade={"persist"})
      */
@@ -200,7 +200,7 @@ class TranslationTerm
     
     public function getDefinedLanguages()
     {
-        return array_map(function ($data) {
+        return array_map(function (TranslationData $data) {
             return $data->getLanguage();
         }, $this->translationData->toArray());
     }

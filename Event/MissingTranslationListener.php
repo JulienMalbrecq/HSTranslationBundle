@@ -3,7 +3,7 @@
 namespace HS\TranslationBundle\Event;
 
 use Doctrine\ORM\EntityManager;
-use HS\TranslationBundle\Event\MissingTranslationEvent;
+use HS\TranslationBundle\Entity\TranslationData;;
 use HS\TranslationBundle\Manager\TranslationDomainManager;
 use HS\TranslationBundle\Manager\TranslationFileManager;
 use HS\TranslationBundle\Manager\TranslationTermManager;
@@ -65,7 +65,7 @@ class MissingTranslationListener
 
             $translationString = sprintf('__%s', (string)$id);
             $term->getTranslationData()->map(
-                function ($translation) use ($translationString) {
+                function (TranslationData $translation) use ($translationString) {
                     $translation->setTranslation($translationString);
                 }
             );
